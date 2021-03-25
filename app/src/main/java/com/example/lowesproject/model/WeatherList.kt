@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class WeatherList (
     val clouds: Clouds,
-    val dt: Int,
+    val dt: Long,
     val dt_txt: String,
     val main: Main,
     val pop: Double,

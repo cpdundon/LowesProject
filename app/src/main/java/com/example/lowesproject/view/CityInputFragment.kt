@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 
 import com.example.lowesproject.databinding.FragmentCityInputBinding
 import com.example.lowesproject.enum.StringConstants
@@ -53,7 +54,7 @@ class CityInputFragment : Fragment() {
 
     private fun setUpListeners() {
         binding.btnFetch.setOnClickListener(View.OnClickListener {
-            val city = binding.etCity.text.toString()
+            val city = binding.etCity.text.toString().trim()
             viewModel.fetchWeather(city, StringConstants.UNITS.value, StringConstants.APP_ID.value)
         })
     }
@@ -66,7 +67,9 @@ class CityInputFragment : Fragment() {
 
             val adapt = moshi.adapter(LowesWeather::class.java)
             val handOff = adapt.toJson(it)
-            val h = handOff
+
+            val action = CityInputFragmentDirections.actionCityInputFragmentToWeatherListFragment(handOff)
+            this.findNavController().navigate(action)
         }
     }
 }

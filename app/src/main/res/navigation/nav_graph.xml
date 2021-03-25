@@ -8,10 +8,22 @@
     <fragment
         android:id="@+id/cityInputFragment"
         android:name="com.example.lowesproject.view.CityInputFragment"
-        android:label="CityInputFragment" />
+        android:label="CityInputFragment" >
+        <action
+            android:id="@+id/action_cityInputFragment_to_weatherListFragment"
+            app:destination="@id/weatherListFragment" />
+    </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.lowesproject.view.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/weatherListFragment"
+        android:name="com.example.lowesproject.view.WeatherListFragment"
+        android:label="WeatherListFragment" >
+        <argument
+            android:name="handOff"
+            app:argType="string" />
+    </fragment>
 </navigation>
