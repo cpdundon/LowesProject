@@ -1,5 +1,11 @@
 package com.example.lowesproject.model
 
+import android.os.Parcelable
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class City(
     val coord: Coord,
     val country: String,
@@ -9,4 +15,4 @@ data class City(
     val sunrise: Int,
     val sunset: Int,
     val timezone: Int
-)
+) : Parcelable
