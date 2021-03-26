@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.lowesproject.adapter.WeatherRVAdapter
 import com.example.lowesproject.databinding.FragmentWeatherDetailBinding
@@ -28,6 +29,7 @@ private const val ARG_PARAM2 = "param2"
 class WeatherDetailFragment : Fragment() {
     private lateinit var binding: FragmentWeatherDetailBinding
     private val args: WeatherDetailFragmentArgs by navArgs()
+    private lateinit var weather: LowesWeather
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -42,11 +44,11 @@ class WeatherDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val weather = args.lowesWeather
+        weather = args.lowesWeather
         val position = args.position
 
         binding.apply {
-
+            tvCity.text = weather.city.name.toString()
             weather.list[position].also {
                 tvTemp.text = it.main.temp.roundToInt().toString()+ (176).toChar() + 'F'
                 tvFeelsLike.text = it.main.feels_like.roundToInt().toString()+ (176).toChar() + 'F'
@@ -54,6 +56,14 @@ class WeatherDetailFragment : Fragment() {
                 tvLongDesc.text = it.weather[IntConstants.WEATHER_LIST_ROOT.value].description
             }
         }
+        setListeners()
+    }
+
+    private fun setListeners() {
+        binding.btnBack.setOnClickListener(View.OnClickListener {
+            val action = WeatherDetailFragmentDirections.actionWeatherDetailFragmentToWeatherListFragment(weather)
+            this.findNavController().navigate(action)
+        })
     }
 
 }

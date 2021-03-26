@@ -25,9 +25,9 @@ class WeatherViewModel : ViewModel() {
         get() = _weather
 
 
-    init {
-        fetchWeather("MumboJumbo", StringConstants.UNITS.value, StringConstants.APP_ID.value)
-    }
+//    init {
+//        fetchWeather("MumboJumbo", StringConstants.UNITS.value, StringConstants.APP_ID.value)
+//    }
 
     fun fetchWeather(location: String, units: String, appid: String) {
 

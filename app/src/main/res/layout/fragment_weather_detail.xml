@@ -6,13 +6,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="view.WeatherDetailFragment">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mt_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/blue_500"
+        android:paddingLeft="5dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:hint="New York"
+            />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
      <com.google.android.material.textview.MaterialTextView
          android:id="@+id/tv_temp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/mt_nav_bar"
          android:gravity="center"
          />
 

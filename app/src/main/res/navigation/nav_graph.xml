@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_cityInputFragment_to_weatherListFragment"
             app:destination="@id/weatherListFragment" />
+        <argument
+            android:name="city"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
@@ -28,6 +31,9 @@
         <argument
             android:name="weatherList"
             app:argType="com.example.lowesproject.model.LowesWeather" />
+        <action
+            android:id="@+id/action_weatherListFragment_to_cityInputFragment"
+            app:destination="@id/cityInputFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"
@@ -39,6 +45,9 @@
         <argument
             android:name="position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_weatherDetailFragment_to_weatherListFragment"
+            app:destination="@id/weatherListFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherListElementFragment"
