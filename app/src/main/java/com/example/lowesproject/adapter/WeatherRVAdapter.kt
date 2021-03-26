@@ -1,11 +1,14 @@
 package com.example.lowesproject.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lowesproject.databinding.FragmentWeatherListElementBinding
+import com.example.lowesproject.enum.IntConstants
 import com.example.lowesproject.model.LowesWeather
+import com.example.lowesproject.view.WeatherListFragmentDirections
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -28,31 +31,37 @@ class WeatherRVAdapter (private val weatherList : LowesWeather) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: WeatherRVAdapter.WeatherViewHolder, position: Int) {
-        if (weatherList != null) {
-            if (weatherList.list.isNotEmpty()) {
-                weatherList.list[position].also { list ->
-                    holder.setWeather(list.dt, list.main.temp, list.weather[0]?.let{ it.description} ?: "")
-                }
-            }
-        }
+        holder.setWeather(weatherList, position)
     }
 
     class WeatherViewHolder(private val binding: FragmentWeatherListElementBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun setWeather(dt : Long, temp : Double, desc : String) {
-            val instant = Instant.ofEpochSecond(dt)
-            val formatter = DateTimeFormatter.ofPattern("E : hh:MMa")
-            val date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
-            Log.i(
-                "TAG -> WeatherRVAdapter",
-                "setWeather: " + formatter.format(date) + " - High Temp: " + temp
-            )
-            binding.tvDate.text = formatter.format(date)
-            binding.tvTemp.text = round(temp).toInt().toString() + (176).toChar() + 'F'
-            binding.tvConditions.text = desc.trim()
 
+        fun setWeather(weatherList: LowesWeather, position: Int) {
+            if (weatherList.list.isNotEmpty()) {
+                weatherList.list[position].also { list ->
+                    val dt = list.dt
+                    val temp = list.main.temp
+                    val weatherTxt = list.weather[IntConstants.WEATHER_LIST_ROOT.value]?.let{ it.description} ?: ""
+
+                    val instant = Instant.ofEpochSecond(dt)
+                    val formatter = DateTimeFormatter.ofPattern("E - ha")
+                    val date = LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+
+                    binding.tvDate.text = formatter.format(date)
+                    binding.tvTemp.text = round(temp).toInt().toString() + (176).toChar() + 'F'
+                    binding.tvConditions.text = weatherTxt.trim()
+                }
+            }
+            setListeners(weatherList, position)
         }
 
+        private fun setListeners (weatherList: LowesWeather, position: Int) {
+            binding.clWeatherElement.setOnClickListener(View.OnClickListener {
+                val action = WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailFragment(weatherList, position)
+                it.findNavController().navigate(action)
+            })
+        }
     }
 }
 

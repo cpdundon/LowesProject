@@ -29,23 +29,11 @@ class WeatherListElementFragment : Fragment() {
         false
     ).also { binding = it }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//
+//    }
 
-        setUpObservers()
-        setUpListeners()
-
-    }
-
-    private fun setUpObservers() {
-
-    }
-
-    private fun setUpListeners() {
-//        binding.btnFetch.setOnClickListener(View.OnClickListener {
-//            val city = binding.etCity.text.toString()
-//            viewModel.fetchWeather(city, StringConstants.UNITS.value, StringConstants.APP_ID.value)
-//        })
-    }
 
 }

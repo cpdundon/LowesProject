@@ -16,10 +16,9 @@ import com.example.lowesproject.viewmodel.WeatherViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
-
 class WeatherListFragment : Fragment() {
     private lateinit var binding: FragmentWeatherListBinding
-    val args: WeatherListFragmentArgs by navArgs()
+    private val args: WeatherListFragmentArgs by navArgs()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -36,27 +35,10 @@ class WeatherListFragment : Fragment() {
 
         setGridLayoutMgr(false)
 
-        val handOff = args.handOff
-
-        val moshi = Moshi.Builder()
-            .addLast(KotlinJsonAdapterFactory())
-            .build()
-
-        val adapt = moshi.adapter(LowesWeather::class.java)
-        val weatherForecast = adapt.fromJson(handOff)
-
-        val weatherAdapter = weatherForecast?.let {
-            binding.rvWeatherList.adapter = WeatherRVAdapter(it)
-        }
-
-
-    //setUpObservers()
-//        setUpListeners()
-
-
-
+        val handOff = args.weatherList
+        binding.tvCity.text = handOff.city.name
+        binding.rvWeatherList.adapter = WeatherRVAdapter(handOff)
     }
-
 
     private fun setGridLayoutMgr(gridToggle : Boolean) {
         if (gridToggle) {

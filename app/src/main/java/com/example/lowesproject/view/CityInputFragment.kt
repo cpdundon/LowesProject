@@ -61,14 +61,7 @@ class CityInputFragment : Fragment() {
 
     private fun proceedToRV (lowesWeather : LowesWeather?) {
         lowesWeather?.let {
-            val moshi = Moshi.Builder()
-                .addLast(KotlinJsonAdapterFactory())
-                .build()
-
-            val adapt = moshi.adapter(LowesWeather::class.java)
-            val handOff = adapt.toJson(it)
-
-            val action = CityInputFragmentDirections.actionCityInputFragmentToWeatherListFragment(handOff)
+            val action = CityInputFragmentDirections.actionCityInputFragmentToWeatherListFragment(it)
             this.findNavController().navigate(action)
         }
     }

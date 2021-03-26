@@ -37,29 +37,29 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/g_05"
         app:layout_constraintEnd_toStartOf="@id/g_35"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="left"/>
+        android:gravity="start"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_temp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/g_35"
         app:layout_constraintEnd_toStartOf="@id/g_65"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="left"/>
+        android:gravity="start"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_conditions"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/g_65"
         app:layout_constraintEnd_toStartOf="@id/g_95"
         app:layout_constraintTop_toTopOf="parent"
-        android:gravity="left"/>
+        android:gravity="start"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

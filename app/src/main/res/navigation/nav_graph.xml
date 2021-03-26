@@ -22,8 +22,26 @@
         android:id="@+id/weatherListFragment"
         android:name="com.example.lowesproject.view.WeatherListFragment"
         android:label="WeatherListFragment" >
+        <action
+            android:id="@+id/action_weatherListFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment" />
         <argument
-            android:name="handOff"
-            app:argType="string" />
+            android:name="weatherList"
+            app:argType="com.example.lowesproject.model.LowesWeather" />
     </fragment>
+    <fragment
+        android:id="@+id/weatherDetailFragment"
+        android:name="com.example.lowesproject.view.WeatherDetailFragment"
+        android:label="WeatherDetailFragment" >
+        <argument
+            android:name="lowesWeather"
+            app:argType="com.example.lowesproject.model.LowesWeather" />
+        <argument
+            android:name="position"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherListElementFragment"
+        android:name="com.example.lowesproject.view.WeatherListElementFragment"
+        android:label="WeatherListElementFragment" />
 </navigation>
