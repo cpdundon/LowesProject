@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.lowesproject.R
 import com.example.lowesproject.adapter.WeatherRVAdapter
 import com.example.lowesproject.databinding.FragmentWeatherListBinding
 import com.example.lowesproject.databinding.FragmentWeatherListElementBinding
@@ -21,7 +23,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 class WeatherListFragment : Fragment() {
     private lateinit var binding: FragmentWeatherListBinding
     private lateinit var handOff: LowesWeather
-    private val args: WeatherListFragmentArgs by navArgs()
+    private val viewModel: WeatherViewModel by activityViewModels()
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -39,18 +41,19 @@ class WeatherListFragment : Fragment() {
         setGridLayoutMgr(false)
         setListeners()
 
-        handOff = args.weatherList
-        binding.tvCity.text = handOff.city.name
-        binding.rvWeatherList.adapter = WeatherRVAdapter(handOff)
+        viewModel.weather.value?.let { wrapper ->
+            wrapper.lowesWeather?.let{
+                handOff = it
+                binding.tvCity.text = handOff.city.name
+                binding.rvWeatherList.adapter = WeatherRVAdapter(handOff)
+            }
+        }
     }
 
     private fun setListeners() {
         binding.btnBack.setOnClickListener(View.OnClickListener {
-            //parentFragmentManager.beginTransaction().remove(this).commitNowAllowingStateLoss()
-            val action = WeatherListFragmentDirections.actionWeatherListFragmentToCityInputFragment(handOff.city.name)
-            this.findNavController().navigate(action)
+            this.findNavController().navigateUp()
         })
-
     }
 
     private fun setGridLayoutMgr(gridToggle : Boolean) {

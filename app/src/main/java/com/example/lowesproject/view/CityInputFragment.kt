@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,8 +27,8 @@ class CityInputFragment : Fragment() {
         val TAG = "CityInputFragment"
     }
     private lateinit var binding: FragmentCityInputBinding
-    private val viewModel = WeatherViewModel()
-    private val args: CityInputFragmentArgs by navArgs()
+    private val viewModel: WeatherViewModel by activityViewModels()
+    private var newClick = true // Need this to capture viewModel re-fire on re-entering the fragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,24 +45,20 @@ class CityInputFragment : Fragment() {
 
         setUpObservers()
         setUpListeners()
-
-        try {
-            binding.etCity.setText(args.city.trim())
-        } catch (e: InvocationTargetException) {
-            //Do Nothing - this is expected on start-up
-            //Log.i(TAG, "onViewCreated: ${e.toString()}")
-        }
     }
 
     private fun setUpObservers() {
         viewModel.weather.observe(viewLifecycleOwner,
             Observer<LowesWeatherWrapper> {
-                val httpCode = it.httpCode
+                if (newClick) {
+                    val httpCode = it.httpCode
 
-                if (httpCode == 200) {
-                    proceedToRV(it.lowesWeather)
-                } else {
-                    errorDisplay(it.httpCode, it.message)
+                    if (httpCode == 200) {
+                        proceedToRV(it.lowesWeather)
+                    } else {
+                        errorDisplay(it.httpCode, it.message)
+                    }
+                    newClick = false
                 }
             })
     }
@@ -77,6 +74,7 @@ class CityInputFragment : Fragment() {
 
     private fun setUpListeners() {
         binding.btnFetch.setOnClickListener(View.OnClickListener {
+            newClick = true
             val city = binding.etCity.text.toString().trim()
             viewModel.fetchWeather(city, StringConstants.UNITS.value, StringConstants.APP_ID.value)
         })
@@ -84,7 +82,7 @@ class CityInputFragment : Fragment() {
 
     private fun proceedToRV (lowesWeather : LowesWeather?) {
         lowesWeather?.let {
-            val action = CityInputFragmentDirections.actionCityInputFragmentToWeatherListFragment(it)
+            val action = CityInputFragmentDirections.actionCityInputFragmentToWeatherListFragment()
             this.findNavController().navigate(action)
         }
     }

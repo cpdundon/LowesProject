@@ -58,7 +58,7 @@ class WeatherRVAdapter (private val weatherList : LowesWeather) : RecyclerView.A
 
         private fun setListeners (weatherList: LowesWeather, position: Int) {
             binding.clWeatherElement.setOnClickListener(View.OnClickListener {
-                val action = WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailFragment(weatherList, position)
+                val action = WeatherListFragmentDirections.actionWeatherListFragmentToWeatherDetailFragment(position)
                 it.findNavController().navigate(action)
             })
         }
