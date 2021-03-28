@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/blue_500"
-        android:paddingLeft="5dp">
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_back"
@@ -25,8 +26,8 @@
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:hint="Boston"
+            android:layout_marginStart="25dp"
+            android:textAppearance="?textAppearanceHeadline5"
             />
 
     </com.google.android.material.appbar.MaterialToolbar>

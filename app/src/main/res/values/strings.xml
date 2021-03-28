@@ -4,4 +4,5 @@
     <string name="restError">There has been an error with the input.  Please check the city name for spelling.  It may not be in our database.\nhttp Error Code: %d.\nError Message: %s</string>
     <string name="base_temp_disp">%d%s F</string>
     <string name="feels_like_temp_disp">Feels Like: %d%s F</string>
+    <string name="city_name">City Name</string>
 </resources>

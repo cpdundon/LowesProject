@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/blue_500"
-        android:paddingLeft="5dp">
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/btn_back"
@@ -25,50 +26,75 @@
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
-            android:hint="New York"
+            android:layout_marginStart="25dp"
+            android:textAppearance="?textAppearanceHeadline5"
             />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
-     <com.google.android.material.textview.MaterialTextView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gh_20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent=".20"
+        android:orientation="horizontal"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_05"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent=".05"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent=".50"
+        android:orientation="vertical"/>
+
+    <com.google.android.material.textview.MaterialTextView
          android:id="@+id/tv_temp"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/mt_nav_bar"
+         app:layout_constraintTop_toBottomOf="@id/gh_20"
          android:gravity="center"
+         android:textAppearance="?textAppearanceHeadline2"
          />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_feels_like"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/g_50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_temp"
-        android:gravity="center"
+        android:gravity="start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_short_desc"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/g_05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_feels_like"
-        android:gravity="center"
+        android:gravity="start"
+        android:textAppearance="?textAppearanceHeadline5"
         />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_long_desc"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/g_05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_short_desc"
-        android:gravity="center"
+        android:gravity="start"
+        android:textAppearance="?textAppearanceBody1"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,7 +28,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/snap_line"
-        android:hint="City"
+        android:hint="@string/city_name"
+        android:textAppearance="?textAppearanceHeadline5"
         android:gravity="center"/>
 
     <com.google.android.material.button.MaterialButton
@@ -36,7 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/et_city"
+        android:textAppearance="?textAppearanceHeadline5"
         android:text="Lookup"
+        style="@style/ShapeAppearance.MyTheme.SmallComponent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
