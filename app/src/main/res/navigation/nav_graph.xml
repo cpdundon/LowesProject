@@ -34,8 +34,4 @@
             android:name="position"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/weatherListElementFragment"
-        android:name="com.example.lowesproject.view.WeatherListElementFragment"
-        android:label="WeatherListElementFragment" />
 </navigation>

@@ -1,14 +1,12 @@
 package com.example.lowesproject.model
-import android.os.Parcelable
-import com.squareup.moshi.JsonClass
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
+import com.squareup.moshi.JsonClass
+
 @JsonClass(generateAdapter = true)
-data class LowesWeather (
-    val city: City,
-    val cnt: Int,
-    val cod: String,
-    val list: List<WeatherList>,
-    val message: Int
-) : Parcelable
+data class LowesWeather(
+        val city: City,
+        val cnt: Int,
+        val cod: String,
+        val list: List<WeatherList>,
+        val message: Int
+)
